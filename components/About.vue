@@ -19,7 +19,7 @@
         <p class="about-text">
           📈 Passionate about system design, low-code platforms, and creating intuitive web experiences.
         </p>
-        <a href="/cv.pdf" target="_blank" class="resume-button">📄 View Resume</a>
+        <a href="../assets/CV.pdf" target="_blank" class="resume-button">📄 View Resume</a>
       </div>
     </div>
   </section>
