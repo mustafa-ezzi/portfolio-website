@@ -1,5 +1,5 @@
 <template>
-  <section class="hero" @mousemove="updateCursor" @mouseleave="hideCursor">
+  <section id="hero" class="hero" @mousemove="updateCursor" @mouseleave="hideCursor">
     <div class="cursor-glow" :style="glowStyle"></div>
 
     <div class="hero-overlay"></div>

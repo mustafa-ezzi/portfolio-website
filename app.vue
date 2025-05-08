@@ -4,6 +4,7 @@
     <About />
     <Projects />
     <Contact />
+    <GameSection />
     <Footer />
   </div>
 </template>

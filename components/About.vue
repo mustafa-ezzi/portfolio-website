@@ -14,12 +14,12 @@
           ✨ <strong>Languages:</strong> JavaScript, TypeScript, Python, Go
         </p>
         <p class="about-text">
-          🧰 <strong>Frameworks & Tools:</strong> Vue, Nuxt, React, TailwindCSS, Django, WordPress, Bubble.io
+          🧰 <strong>Frameworks & Tools:</strong> Vue, Nuxt,Angular, React, TailwindCSS, Django, WordPress, Bubble.io
         </p>
         <p class="about-text">
           📈 Passionate about system design, low-code platforms, and creating intuitive web experiences.
         </p>
-        <a href="../assets/auction.png" target="_blank" class="resume-button">📄 View Resume</a>
+        <a href="/cv.pdf" target="_blank" class="resume-button">📄 View Resume</a>
       </div>
     </div>
   </section>
@@ -51,9 +51,9 @@ onMounted(() => {
 
 <style scoped>
 .about-section {
-  background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+  background-color: var(--color-bg, #121c24);
   padding: 100px 20px;
-  color: #fff;
+  color: var(--color-text-light, #ffffff);
   display: flex;
   justify-content: center;
 }
@@ -82,8 +82,8 @@ onMounted(() => {
   height: 240px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #00bfa6;
-  box-shadow: 0 12px 24px rgba(0, 191, 166, 0.2);
+  border: 4px solid var(--color-primary, #00bfa6);
+  box-shadow: 0 12px 24px rgba(0, 191, 166, 0.3);
   transition: transform 0.3s ease;
 }
 
@@ -102,7 +102,7 @@ onMounted(() => {
   font-size: 2.8rem;
   font-weight: 900;
   margin-bottom: 25px;
-  color: #00bfa6;
+  color: var(--color-primary, #00bfa6);
   background: -webkit-linear-gradient(#00bfa6, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -112,15 +112,15 @@ onMounted(() => {
   font-size: 1.1rem;
   line-height: 1.75;
   margin-bottom: 16px;
-  color: #e2e8f0;
+  color: var(--color-muted, #cbd5e1);
 }
 
 .resume-button {
   display: inline-block;
   padding: 12px 24px;
   background-color: transparent;
-  border: 2px solid #00bfa6;
-  color: #00bfa6;
+  border: 2px solid var(--color-primary, #00bfa6);
+  color: var(--color-primary, #00bfa6);
   font-weight: bold;
   text-decoration: none;
   border-radius: 6px;
@@ -128,8 +128,9 @@ onMounted(() => {
 }
 
 .resume-button:hover {
-  background: #00bfa6;
-  color: #0f2027;
+  background: var(--color-accent, #ffbfa3);
+  border-color: var(--color-accent, #ffbfa3);
+  color: var(--color-bg, #121c24);
 }
 
 /* Animation classes */
@@ -154,4 +155,5 @@ onMounted(() => {
     padding-top: 30px;
   }
 }
+
 </style>
