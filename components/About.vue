@@ -19,7 +19,9 @@
         <p class="about-text">
           📈 Passionate about system design, low-code platforms, and creating intuitive web experiences.
         </p>
-        <a href="../assets/CV.pdf" target="_blank" class="resume-button">📄 View Resume</a>
+        <a href="/CV.pdf" download class="download-button">
+  📥 Download CV
+</a>
       </div>
     </div>
   </section>
@@ -76,6 +78,28 @@ onMounted(() => {
   transform: translateX(-50px);
   transition: all 1.5s ease-out;
 }
+
+.download-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--color-primary, #b2fefa);
+  color: var(--color-bg, #0a1e2d);
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.download-button:hover {
+  background: var(--color-accent, #f1c40f);
+  color: var(--color-bg, #0a1e2d);
+  transform: translateY(-2px);
+}
+
 
 .profile-image {
   width: 240px;
