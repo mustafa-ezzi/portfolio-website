@@ -1,3 +1,12 @@
+:root {
+  --color-primary: #b2fefa;     /* Soft Mint */
+  --color-bg: #0a1e2d;          /* Deep Blue */
+  --color-accent: #f1c40f;      /* Warm Yellow */
+  --color-text-light: #ffffff;  /* Pure white for headlines */
+  --color-muted: #d1d5db;       /* Subtext / body */
+  --color-border: #1e293b;      /* Cards, outlines */
+}
+
 
 
 body {

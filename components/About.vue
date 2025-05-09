@@ -19,10 +19,13 @@
         <p class="about-text">
           📈 Passionate about system design, low-code platforms, and creating intuitive web experiences.
         </p>
-        <a href="/CV.pdf" download class="download-button">
+        <a href="/CV.pdf" download   @click.prevent="downloadCV" class="download-button">
   📥 Download CV
 </a>
       </div>
+      <div v-if="snackbarVisible" class="snackbar">
+      📄 CV downloaded successfully!
+    </div>
     </div>
   </section>
 </template>
@@ -32,6 +35,23 @@ import { ref, onMounted } from 'vue'
 
 const imageVisible = ref(false)
 const contentVisible = ref(false)
+const snackbarVisible = ref(false)
+
+const downloadCV = () => {
+  // Trigger browser download
+  const link = document.createElement('a')
+  link.href = '/CV.pdf'
+  link.download = 'Mustafa_Moiz_CV.pdf'
+  link.click()
+
+  // Show snackbar
+  snackbarVisible.value = true
+
+  // Auto-hide after 3 seconds
+  setTimeout(() => {
+    snackbarVisible.value = false
+  }, 3000)
+}
 
 onMounted(() => {
   const observer = new IntersectionObserver(
@@ -49,9 +69,36 @@ onMounted(() => {
   const section = document.getElementById('about')
   if (section) observer.observe(section)
 })
+
 </script>
 
 <style scoped>
+.snackbar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-primary, #b2fefa);
+  color: var(--color-bg, #0a1e2d);
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  animation: fadeSlideUp 0.4s ease-out;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 .about-section {
   background-color: var(--color-bg, #121c24);
   padding: 100px 20px;
@@ -78,28 +125,6 @@ onMounted(() => {
   transform: translateX(-50px);
   transition: all 1.5s ease-out;
 }
-
-.download-button {
-  display: inline-block;
-  padding: 12px 24px;
-  background: var(--color-primary, #b2fefa);
-  color: var(--color-bg, #0a1e2d);
-  font-weight: bold;
-  font-size: 1rem;
-  text-decoration: none;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.download-button:hover {
-  background: var(--color-accent, #f1c40f);
-  color: var(--color-bg, #0a1e2d);
-  transform: translateY(-2px);
-}
-
 
 .profile-image {
   width: 240px;
@@ -167,6 +192,27 @@ onMounted(() => {
   opacity: 1 !important;
   transform: translateX(0) !important;
 }
+.download-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--color-primary, #b2fefa);
+  color: var(--color-bg, #0a1e2d);
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.download-button:hover {
+  background: var(--color-accent, #f1c40f);
+  color: var(--color-bg, #0a1e2d);
+  transform: translateY(-2px);
+}
+
 
 /* Mobile styles */
 @media (max-width: 768px) {
