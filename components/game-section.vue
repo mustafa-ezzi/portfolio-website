@@ -175,6 +175,7 @@ const getOptionClass = (option) => {
 .feedback {
     margin-top: 1.5rem;
     font-weight: bold;
+    color:#333
 }
 
 .feedback.correct {
