@@ -1,135 +1,121 @@
 <template>
   <section id="projects" class="projects-section">
-    <div class="wave-top"></div>
-    <h2 class="section-title">PROJECTS</h2>
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">A showcase of my recent work and digital experiences</p>
 
-    <swiper
-      :modules="[Navigation, Autoplay]"
-      :slides-per-view="1"
-      :space-between="30"
-      :loop="true"
-      :autoplay="{ delay: 4000 }"
-      :breakpoints="{
-        768: { slidesPerView: 1.1 },
-        1024: { slidesPerView: 2 }
-      }"
-      navigation
-      class="project-swiper"
-    >
-      <swiper-slide v-for="(project, index) in projects" :key="index">
-        <div class="project-card">
-          <img
-            :src="project.href"
-            :alt="project.title"
-            class="project-image"
-            :style="imageStyles[index]"
-            @mousemove="handleMouseMove($event, index)"
-            @mouseleave="resetTilt(index)"
-          />
-          <div class="project-text">
-            <h3>{{ project.title }}</h3>
-            <p>{{ project.description }}</p>
-            <a v-if="project.link" :href="project.link" class="live-button" target="_blank" rel="noopener">
-              See Live
-            </a>
+      <swiper
+        :modules="[Navigation, Autoplay, Pagination]"
+        :slides-per-view="1"
+        :space-between="30"
+        :loop="true"
+        :autoplay="{ delay: 5000, disableOnInteraction: false }"
+        :pagination="{ clickable: true }"
+        :breakpoints="{
+          768: { slidesPerView: 2, spaceBetween: 25 },
+          1024: { slidesPerView: 3, spaceBetween: 30 }
+        }"
+        navigation
+        class="project-swiper"
+      >
+        <swiper-slide v-for="(project, index) in projects" :key="index">
+          <div class="project-card" @mouseenter="hoveredIndex = index" @mouseleave="hoveredIndex = null">
+            <div class="image-wrapper">
+              <img
+                :src="project.href"
+                :alt="project.title"
+                class="project-image"
+              />
+              <div class="image-overlay" :class="{ active: hoveredIndex === index }">
+                <a v-if="project.link" :href="project.link" class="view-project" target="_blank" rel="noopener">
+                  <span>View Project</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            <div class="project-content">
+              <h3 class="project-title">{{ project.title }}</h3>
+              <p class="project-description">{{ project.description }}</p>
+              
+              <div class="project-footer">
+                <span class="project-type">{{ project.type || 'Web Application' }}</span>
+              </div>
+            </div>
           </div>
-        </div>
-      </swiper-slide>
-
-      <!-- Navigation Arrows -->
-      <!-- <div class="swiper-button-prev custom-nav">&lt;</div> -->
-      <!-- <div class="swiper-button-next custom-nav">&gt;</div> -->
-    </swiper>
+        </swiper-slide>
+      </swiper>
+    </div>
   </section>
 </template>
-
 
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 import ptp from '@/assets/ptp.png'
 import sooicy from '@/assets/sooicy.png'
+import invoice from '@/assets/invoice.png'
+
 import auction from "../assets/auction.png"
 import erp from "../assets/erp.png"
 import trisite from "../assets/trisite.png"
 import QJ from "../assets/qj.png"
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import SwiperCore from 'swiper'
-import { Navigation, Autoplay } from 'swiper/modules'
-import 'swiper/css/navigation'
+import { Navigation, Autoplay, Pagination } from 'swiper/modules'
 
-SwiperCore.use([Navigation, Autoplay])
+SwiperCore.use([Navigation, Autoplay, Pagination])
 
-const imageStyles = ref([])
+const hoveredIndex = ref(null)
 
-const handleMouseMove = (e, index) => {
-  const card = e.currentTarget
-  const rect = card.getBoundingClientRect()
-  const x = e.clientX - rect.left
-  const y = e.clientY - rect.top
-  const centerX = rect.width / 2
-  const centerY = rect.height / 2
-
-  const rotateX = ((y - centerY) / centerY) * -10
-  const rotateY = ((x - centerX) / centerX) * 10
-
-  imageStyles.value[index] = {
-    transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`,
-    transition: 'transform 0.1s ease-out',
-  }
-}
-
-const resetTilt = (index) => {
-  imageStyles.value[index] = {
-    transform: 'rotateX(0deg) rotateY(0deg) scale(1)',
-    transition: 'transform 0.5s ease',
-  }
-}
-
-// Ensure default styles for all images
-onMounted(() => {
-  imageStyles.value = projects.map(() => ({
-    transform: 'rotateX(0deg) rotateY(0deg)',
-  }))
-})
 const projects = [
-{
-    title: "SooIcy ",
-    description:"SooIcy is a fully custom digital experience built for an ice-cream parlour brand, designed to bring their menu, vibe, and personality straight to customers online. The project includes a modern React-based storefront paired with a Python backend, creating a smooth and reliable flow from product browsing to order placement. I also developed a full admin panel that lets the SooIcy team manage products, categories, and orders without needing any technical steps. Throughout the build, I worked through challenges like real-time updates, category syncing, and UI performance — solving them with optimized state management, clean API structuring, and smart scroll-based interactions. The final result is a fast, aesthetic, and easy-to-use platform that fits the SooIcy brand perfectly."
-    ,// link: "https://predictpick.web.app",
+  {
+    title: "Invoice Management System",
+description: "A full-featured invoice and quotation management system built with React and Node.js. Streamlines creation, tracking, and management of quotations and invoices, providing a smooth and efficient workflow for businesses.",
+    type: "Invoice System",
+    href: invoice,
+  },
+  {
+    title: "SooIcy",
+    description: "A fully custom digital platform for an ice-cream parlour featuring a sleek React frontend and Python backend. Delivers smooth product browsing, order flow, and a full admin panel.",
+    type: "E-Commerce",
     href: sooicy,
   },
   {
     title: "Predict the Pick",
-    description:
-      " Predict the Pick app provides real-time game updates, player stats, team standings, and news highlights.             It features live score tracking, personalized notifications, and a seamless user experience. The frontend is             built using Vue.js with Nuxt.js for SSR, while Firebase powers the backend and             database for real-time data synchronization.",
+    description: "Real-time sports app with live scores, player stats, and personalized notifications. Built with Vue.js, Nuxt.js, and Firebase for seamless data synchronization.",
     link: "https://predictpick.web.app",
+    type: "Sports App",
     href: ptp,
   },
   {
     title: "Auction Pro",
-    description:
-      "The Cricket Tournament Auction App is designed to streamline player auctions with efficiency and ease.             Built using Vue.js and Vuetify for an interactive front-end, it delivers a seamless user experience. Django             powers the robust back-end,             ensuring secure and efficient data handling. This app is tailored for cricket enthusiasts, simplifying the             auction process from start to finish.",
+    description: "Cricket tournament auction app streamlining player auctions with Vue.js and Django. Designed for efficiency and an interactive user experience.",
     link: "https://www.worldofqj.com/",
+    type: "Auction Platform",
     href: auction
   },
   {
     title: "ERP System",
-    description:
-      " Built with Angular on the front-end and Python on the back-end, this ERP system streamlines business             operations into a cohesive platform.             Smooth data synchronization was ensured through efficient APIs and robust error handling. Performance for             large datasets was optimized             using advanced caching and pagination, delivering a scalable solution that enhances productivity and user             satisfaction.    ",
+    description: "Comprehensive business management platform built with Angular and Python. Optimized for large datasets with advanced caching and pagination.",
+    type: "Enterprise",
     href: erp
   },
   {
     title: "Trisite Solutions",
-    description:
-      "Trisite Solutions is a modern, responsive website built to showcase a digital services agency and its range             of offerings. Developed using Nuxt.js for optimal performance and seamless routing, the site delivers a fast             and dynamic user experience. The UI is crafted with Tailwind CSS, providing a clean, minimal, and fully             responsive design across all screen sizes. ",
+    description: "Modern, responsive agency website built with Nuxt.js and Tailwind CSS. Fast, dynamic, and fully responsive across all devices.",
     link: "https://www.trisitesolutions.com/",
+    type: "Corporate Site",
     href: trisite
   },
   {
     title: "QJ Challenges",
-    description:
-      "  QJ Challenges is an interactive quiz app designed to test and enhance your knowledge across various             categories.             Built with React.js for a dynamic user experience and Django for a robust back-end, it ensures seamless             performance.             Users can engage in challenging quizzes tailored to their interests and track their progress.             The app combines learning with fun, making it an exciting platform for self-improvement.     ",
+    description: "Interactive quiz app built with React.js and Django. Test knowledge across various categories while tracking progress and achievements.",
+    type: "Education",
     href: QJ
   },
 ]
@@ -137,129 +123,244 @@ const projects = [
 
 <style scoped>
 .projects-section {
-  background: linear-gradient(to bottom, #fdfbfb, #ebedee);
-  padding: 5rem 5%;
+  background: #f8f9fa;
+  padding: 6rem 0;
   position: relative;
+  overflow: hidden;
+}
+
+.projects-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00bfa6, transparent);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .section-title {
   text-align: center;
-  font-size: 3rem;
-  font-weight: 900;
-  color: #221c3b;
-  margin-bottom: 3rem;
-  letter-spacing: 1px;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.5px;
 }
 
-
-.project-card:hover .project-image {
-  transform: rotateY(10deg) rotateX(5deg) scale(1.02);
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+.section-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 4rem;
+  font-weight: 400;
 }
 
 .project-swiper {
-  padding-bottom: 3rem;
+  padding-bottom: 4rem;
 }
 
 .project-card {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  background: white;
+  border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.4s ease;
-  height: 550px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  perspective: 1000px;
-  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .project-card:hover {
   transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 191, 166, 0.15);
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .project-image {
   width: 100%;
-  border-radius: 15px;
-    height: 260px;     
+  height: 100%;
   object-fit: cover;
-  box-shadow: 0 6px 15px rgba(0, 191, 166, 0.25);
-  margin-bottom: 1.5rem;
-  transition: transform 0.4s ease, box-shadow 0.3s ease;
-  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.project-text h3 {
-  font-size: 1.6rem;
-  color: #221c3b;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
+.project-card:hover .project-image {
+  transform: scale(1.08);
 }
 
-.project-text p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #444;
-  margin-bottom: 1rem;
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 191, 166, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.custom-nav {
+.image-overlay.active {
+  opacity: 1;
+}
+
+.view-project {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  background: white;
   color: #00bfa6;
-  font-size: 2rem;
-  font-weight: bold;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.view-project:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.view-project svg {
+  transition: transform 0.3s ease;
+}
+
+.view-project:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.project-content {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.project-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 1.5rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.project-type {
+  display: inline-block;
+  padding: 0.375rem 0.875rem;
+  background: linear-gradient(135deg, #00bfa6, #00d4b8);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Swiper Navigation Customization */
+:deep(.swiper-button-next),
+:deep(.swiper-button-prev) {
+  width: 45px;
+  height: 45px;
   background: white;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  line-height: 38px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.swiper-button-next.custom-nav {
-  right: 10px;
-}
-
-.swiper-button-prev.custom-nav {
-  left: 10px;
-}
-
-.custom-nav:hover {
-  background: #00bfa6;
-  color: white;
-}
-
-.live-button {
-  display: inline-block;
-  padding: 10px 16px;
-  font-weight: bold;
-  background: #00bfa6;
-  color: white;
-  border-radius: 6px;
-  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
-.live-button:hover {
-  background: #009c88;
+:deep(.swiper-button-next::after),
+:deep(.swiper-button-prev::after) {
+  font-size: 18px;
+  font-weight: 900;
+  color: #00bfa6;
 }
 
-.wave-top {
-  position: absolute;
-  top: -60px;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: linear-gradient(135deg, #00bfa6 50%, transparent 50%);
-  z-index: 1;
+:deep(.swiper-button-next:hover),
+:deep(.swiper-button-prev:hover) {
+  background: #00bfa6;
+  transform: scale(1.1);
+}
+
+:deep(.swiper-button-next:hover::after),
+:deep(.swiper-button-prev:hover::after) {
+  color: white;
+}
+
+:deep(.swiper-pagination-bullet) {
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+:deep(.swiper-pagination-bullet-active) {
+  background: #00bfa6;
+  width: 28px;
+  border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+  
+  .image-wrapper {
+    height: 220px;
+  }
+  
+  .project-content {
+    padding: 1.5rem;
+  }
+  
+  .project-title {
+    font-size: 1.25rem;
+  }
+  
+  .project-description {
+    font-size: 0.9rem;
+    -webkit-line-clamp: 3;
+  }
 }
 </style>
