@@ -48,6 +48,7 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import ptp from '@/assets/ptp.png'
+import sooicy from '@/assets/sooicy.png'
 import auction from "../assets/auction.png"
 import erp from "../assets/erp.png"
 import trisite from "../assets/trisite.png"
@@ -92,6 +93,12 @@ onMounted(() => {
   }))
 })
 const projects = [
+{
+    title: "SooIcy ",
+    description:"SooIcy is a fully custom digital experience built for an ice-cream parlour brand, designed to bring their menu, vibe, and personality straight to customers online. The project includes a modern React-based storefront paired with a Python backend, creating a smooth and reliable flow from product browsing to order placement. I also developed a full admin panel that lets the SooIcy team manage products, categories, and orders without needing any technical steps. Throughout the build, I worked through challenges like real-time updates, category syncing, and UI performance — solving them with optimized state management, clean API structuring, and smart scroll-based interactions. The final result is a fast, aesthetic, and easy-to-use platform that fits the SooIcy brand perfectly."
+    ,// link: "https://predictpick.web.app",
+    href: sooicy,
+  },
   {
     title: "Predict the Pick",
     description:
@@ -161,6 +168,7 @@ const projects = [
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   transition: transform 0.4s ease;
+  height: 550px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -176,6 +184,8 @@ const projects = [
 .project-image {
   width: 100%;
   border-radius: 15px;
+    height: 260px;     
+  object-fit: cover;
   box-shadow: 0 6px 15px rgba(0, 191, 166, 0.25);
   margin-bottom: 1.5rem;
   transition: transform 0.4s ease, box-shadow 0.3s ease;
