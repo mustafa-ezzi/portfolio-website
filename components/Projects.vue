@@ -66,7 +66,7 @@ import trisite from "../assets/trisite.png"
 import QJ from "../assets/qj.png"
 import { ref, onMounted } from 'vue'
 import SwiperCore from 'swiper'
-import { Navigation, Autoplay, Pagination } from 'swiper/modules'
+import { Navigation, Autoplay, Pagination } from 'swiper/modules' 
 
 SwiperCore.use([Navigation, Autoplay, Pagination])
 
