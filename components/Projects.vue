@@ -63,7 +63,7 @@ import ptp from '@/assets/ptp.png'
 import sooicy from '@/assets/sooicy.png'
 import invoice from '@/assets/invoice.png'
 import auction from "../assets/auction.png"
-import erp from "../assets/erp.png"
+import coreledger from "../assets/coreledger.png"
 import trisite from "../assets/trisite.png"
 import QJ from "../assets/qj.png"
 import CyberShield from "../assets/cybersheild.png"
@@ -114,12 +114,14 @@ const projects = [
     tags: ["Vue 3", "Nuxt", "Django"]
   },
   {
-    id: "erp",
-    title: "ERP System",
-    description: "A robust enterprise-grade business management system built to handle complex workflows and large datasets. The platform integrates multiple business modules, supports advanced caching and pagination strategies, and delivers high performance and scalability for organizations managing extensive operational data.",
-    type: "Enterprise",
-    href: erp,
-    tags: ["Angular", "Django"]
+    id: "coreledger",
+    title: "CoreLedger ERP",
+    description: "A trading and manufacturing ERP that unifies inventory, purchasing, sales, banking, and double-entry accounting in one platform. It supports multi-company dimensions, automatic balanced journal posting from invoices and payments, and financial reports including balance sheet, ledgers, and COA completeness. Built for real operational scale with raw materials, finished goods, production workflows, and role-based staff access.",
+    type: "Enterprise ERP",
+    link: "https://coreledger.up.railway.app/",
+
+    href: coreledger,
+    tags: ["React", "Django", "PostgreSQL", "JWT"]
   },
   {
     id: "trisite",

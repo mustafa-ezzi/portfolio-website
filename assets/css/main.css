@@ -1,126 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 :root {
-  --color-primary: #b2fefa;     /* Soft Mint */
-  --color-bg: #0a1e2d;          /* Deep Blue */
-  --color-accent: #f1c40f;      /* Warm Yellow */
-  --color-text-light: #ffffff;  /* Pure white for headlines */
-  --color-muted: #d1d5db;       /* Subtext / body */
-  --color-border: #1e293b;      /* Cards, outlines */
+  /* Brand */
+  --color-accent: #00bfa6;
+  --color-accent-dark: #009c88;
+  --color-accent-soft: rgba(0, 191, 166, 0.1);
+
+  /* Surfaces */
+  --color-bg: #ffffff;
+  --color-bg-dark: #0f172a;
+  --color-bg-subtle: #f8fafc;
+  --color-border: #e2e8f0;
+
+  /* Text */
+  --color-heading: #0f172a;
+  --color-text: #475569;
+  --color-muted: #94a3b8;
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-md: 0 10px 30px -15px rgba(15, 23, 42, 0.15);
+  --shadow-lg: 0 25px 50px -12px rgba(15, 23, 42, 0.18);
+
+  /* Layout */
+  --nav-height: 72px;
+  --container: 1200px;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   margin: 0;
   padding: 0;
-  color: var(--color-text-light);
+  color: var(--color-text);
   background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-heading);
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Shared section heading helpers (opt-in) */
 .section {
-  padding: 80px 24px;
+  padding: 100px 24px;
 }
 
-.section h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--color-primary);
-  margin-bottom: 1rem;
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-.button {
-  padding: 12px 24px;
-  background-color: var(--color-primary);
-  color: var(--color-text-light);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.3s ease;
-}
-.filled-button:hover {
-  background: var(--color-accent); /* yellow */
-  color: var(--color-bg);
+/* Text selection */
+::selection {
+  background: var(--color-accent);
+  color: #ffffff;
 }
 
-.button:hover {
-  background-color: var(--color-primary); /* mint */
-  color: var(--color-bg); /* dark background */
-}
-
-.button-outline {
-  padding: 12px 24px;
-  border: 2px solid var(--color-primary);
-  color: var(--color-primary);
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: none;
-  background: transparent;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-.button-outline:hover {
-  background-color: var(--color-primary);
-  color: var(--color-text-light);
-}
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 2rem;
-}
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.project-card {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 24px;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
-  color: var(--color-text-light);
-}
-
-.project-card:hover {
-  box-shadow: 0 6px 12px rgba(0, 191, 166, 0.3);
-  transform: translateY(-4px);
-}
-
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-}
-
-/* Stylish Custom Scrollbar - works in WebKit (Chrome, Edge, Safari) */
+/* Custom scrollbar aligned to brand */
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a1e2d; /* Dark Blue BG */
+  background: var(--color-bg-subtle);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #b2fefa, #72e4f6); /* Soft Mint gradient */
+  background: #cbd5e1;
   border-radius: 8px;
-  border: 2px solid #0a1e2d;
+  border: 2px solid var(--color-bg-subtle);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #f1c40f, #b2fefa); /* Warm Yellow accent on hover */
+  background: var(--color-accent);
 }
 
-/* Firefox scrollbar styling */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #b2fefa #0a1e2d;
+  scrollbar-color: #cbd5e1 var(--color-bg-subtle);
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

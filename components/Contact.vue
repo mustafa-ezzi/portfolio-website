@@ -45,10 +45,6 @@
         </div>
       </div>
     </div>
-
-    <footer class="mini-footer">
-      <p>&copy; 2024 Mustafa Moiz. Built with Vue & Passion.</p>
-    </footer>
   </section>
 </template>
 
@@ -185,12 +181,6 @@
 
 .social-btn:hover {
   color: #00bfa6;
-}
-
-.mini-footer {
-  margin-top: 80px;
-  color: #475569;
-  font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {

@@ -1,11 +1,12 @@
 <template>
-  <div class="bg-white text-dark font-sans">
+  <div class="app-root">
     <div v-if="!selectedProject">
+      <Navbar />
       <Hero />
       <About />
       <Projects @view-details="openProject" />
-      <Contact />
       <GameSection />
+      <Contact />
     </div>
 
     <div v-else>
@@ -19,13 +20,15 @@
 
 <script setup>
 import { ref } from 'vue'
+import Navbar from './components/Navbar.vue'
 import Hero from './components/Hero.vue'
 import About from './components/About.vue'
 import Projects from './components/Projects.vue'
 import Contact from './components/Contact.vue'
 import Footer from './components/Footer.vue'
 import Whatsapp from './components/Whatsapp.vue'
-import ProjectDetail from './components/ProjectDetail.vue' // You'll create this
+import GameSection from './components/game-section.vue'
+import ProjectDetail from './components/ProjectDetail.vue'
 
 const selectedProject = ref(null)
 
