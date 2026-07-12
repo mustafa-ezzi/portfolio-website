@@ -67,9 +67,19 @@ import coreledger from "../assets/coreledger.png"
 import trisite from "../assets/trisite.png"
 import QJ from "../assets/qj.png"
 import CyberShield from "../assets/cybersheild.png"
+import labourpro from "../assets/LabourPro.png"
 
 defineEmits(['view-details'])
 const projects = [
+  {
+    id: "labourpro",
+    title: "LabourPro",
+    description: "An offline-first SaaS platform built for construction sites and contractors to replace registers, Excel sheets, and manual calculations. LabourPro manages multiple sites, crew records, daily attendance, and wages that carry forward until paid, alongside material purchases and payments. As an installable PWA with local IndexedDB storage and background sync, it keeps working in low-signal site conditions and syncs automatically once online, all within a secure, company-scoped multi-tenant architecture.",
+    link: "https://labour-management.up.railway.app/",
+    type: "SaaS Product (PWA)",
+    href: labourpro,
+    tags: ["Nuxt 3", "Vue 3", "Django", "PostgreSQL", "Dexie.js", "PWA"]
+  },
   {
     id: "cybershield",
     title: "CyberShield",
